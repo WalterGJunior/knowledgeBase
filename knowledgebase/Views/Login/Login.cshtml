@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "_Login.cshtml";
+}
+
+        <div class="row text-center ">
+            <div class="col-md-12">
+                <br />
+                <br />
+                <h2>Controle Financeiro : Login</h2>
+
+                <br />
+            </div>
+        </div>
+        <div class="row ">
+
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Entre com seus dados </strong>
+                    </div>
+                    <div class="panel-body">
+@{
+    
+    if (ViewBag.Validar != null)
+    {
+       int valor = Convert.ToInt32(ViewBag.Validar);
+
+       if (valor == 0)
+        {     
+            <div class="alert alert-warning">
+                Preencher o(s) campo(s) obrigatório(s).
+            </div>
+        }
+        else if (valor == -1)
+        {
+            <div class="alert alert-danger">
+                Usuário não encontrado
+            </div>
+        }
+    }
+}
+
+                    @using(Html.BeginForm("ValidarLogin", "Login", FormMethod.Post))
+                    {
+                            <br />
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                                <input type="text" class="form-control" name="email_usuario" placeholder="Email Usuário " />
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" class="form-control" name="senha_usuario" placeholder="Sua Senha" />
+                            </div>
+                            <div class="form-group">
+                                <button name="btn_logar" id="btn_logar" class="btn btn-info">Logar</button>
+                            </div>
+
+
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>

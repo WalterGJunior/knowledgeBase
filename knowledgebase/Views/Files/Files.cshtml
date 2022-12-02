@@ -1,0 +1,74 @@
+﻿@model FileClass
+@{
+    ViewData["Title"] = "Files";
+}
+
+<form asp-controller="Files" asp-action="Files" method="post" enctype="multipart/form-data">
+    <table class="table table-striped" cellpadding="0">
+        <tbody>
+            <tr>
+                <th> 
+                    <input type="file" name="file"/>
+                </th>
+                <th>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                            Select App
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">test1</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">test2</a></li>
+                        </ul>
+                    </div>
+                </th>
+                <th>
+                    <button class="btn btn-outline-secondary" type="submit" >Upload</button>  
+                </th>
+                <th> 
+                    <div class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
+                </th>
+            </tr>
+        </tbody>
+   </table>   
+    
+    @if (Model != null)
+    {
+        <hr/> 
+            <table class="table table-bordered table-striped" cellpadding="0" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th> KB </th>
+                        <th> PDF Name </th>
+                        <th> Application Name </th>
+                        <th> Display Type </th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                @foreach (FileClass file in Model.Files)
+                {
+                    <tr>
+                       <td>@file.FileId</td>
+                       <td>@file.Name</td>
+                       <th>@file.AppName</th>
+                       <td>
+                           <a href="../Files/Files?filename=@file.Name" style="margin-right:10px" @file.Name> View Document </a>
+                           <a href="../Files/PDFViwerNewTab?filename=@file.Name" target="_blank" @file.Name> Open in New Tab</a>
+                       </td> 
+                    </tr>
+                }
+                </tbody>
+        
+        </table>
+        
+    }
+    
+    <br/><br/>
+    <embed id="embPDF" src="/files/@Model.Name" style="width:100%; height:1200px;"/>
+    
+
+</form>
